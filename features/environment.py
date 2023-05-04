@@ -7,7 +7,7 @@ from app.application import Application
 #from support.logger import logger, MyListener
 
 # Allure command:
-# behave -f allure_behave.formatter:AllureFormatter -o test_results/ features/tests/product_page.feature
+# behave -f allure_behave.formatter:AllureFormatter -o test_results/features/tests/product_page.feature
 #allure serve test_results/
 def browser_init(context, test_name):
     """
@@ -34,22 +34,22 @@ def browser_init(context, test_name):
     #     webdriver.Chrome(service=service),
     #     MyListener()
     # )
-
+    #
     # for browerstack ###
     # Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
 
-    # desired_cap = {
-    #     'browserName': 'Firefox',
-    #     'bstack:options': {
-    #     'os': 'Windows',
-    #     'osVersion': '11',
-    #     'sessionName': test_name
-    #     }
-    # }
-    # bs_user = 'lanamikolenko_0qvtwj'
-    # bs_key = 'Cc4pkzwnwUaT4mnsfuUq'
-    # url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
-    # context.driver = webdriver.Remote(url, desired_capabilities=desired_cap)
+    desired_cap = {
+        'browserName': 'Firefox',
+        'bstack:options': {
+        'os': 'Windows',
+        'osVersion': '11',
+        'sessionName': test_name
+        }
+    }
+    bs_user = 'lanamikolenko_0qvtwj'
+    bs_key = 'Cc4pkzwnwUaT4mnsfuUq'
+    url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+    context.driver = webdriver.Remote(url, desired_capabilities=desired_cap)
 
     context.driver.wait = WebDriverWait(context.driver, 10)
     #context.app = Application(driver=context.driver)
