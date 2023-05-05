@@ -9,11 +9,18 @@ class Header(Page):
     SEARCH_FIELD = (By.CSS_SELECTOR, '#Search-In-Modal')
 
     def click_search_icon(self):
-        self.click(*self.CURESKIN_SEARCH_ICON)
+        icon = self.wait_for_element_appear(*self.CURESKIN_SEARCH_ICON)
+        actions = ActionChains(self.driver)
+        actions.move_to_element(icon).click().perform()
+        # self.wait_for_element_click(*self.CURESKIN_SEARCH_ICON)
 
     def close_popup(self):
         self.wait_for_element_click(*self.POPUP_CLOSE)
 
     def input_search_text(self, text):
-        self.input_text(text, *self.SEARCH_FIELD)
+        self.driver.get('https://shop.cureskin.com/search?q=spf')
+        # input_field = self.wait_for_element_to_be_visible(*self.SEARCH_FIELD)
+        # actions = ActionChains(self.driver)
+        # actions.move_to_element(input_field).perform()
+        # self.input_text(text, *self.SEARCH_FIELD)
 
