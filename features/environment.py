@@ -12,34 +12,34 @@ from app.application import Application
 # behave -f allure_behave.formatter:AllureFormatter -o test_results/features/tests/product_page.feature
 #allure serve test_results/
 def browser_init(context):
-    # #test_name
-    # """
-    # :param context: Behave context
-    # :param test_name: scenario.name
-    # """
-    # service = Service('/Users/svetlanamikolenko/PycharmProjects/automation-internship/chromedriver')
-    service = Service('/Users/svetlanamikolenko/PycharmProjects/automation-internship/geckodriver')
+    #test_name
+    """
+    :param context: Behave context
+    :param test_name: scenario.name
+    """
+    service = Service('/Users/svetlanamikolenko/PycharmProjects/automation-internship/chromedriver')
+    # service = Service('/Users/svetlanamikolenko/PycharmProjects/automation-internship/geckodriver')
     # service = Service('/Users/svetlanamikolenko/Desktop/automation/python-selenium-automation/geckodriver')
-    # context.driver = webdriver.Chrome(service=service)
+    context.driver = webdriver.Chrome(service=service)
     # context.driver = webdriver.Firefox(service=service)
     # context.driver = webdriver.Safari()
 
     # HEADLESS MODE ####
     # options = webdriver.ChromeOptions()
-    options = webdriver.FirefoxOptions()
-    options.add_argument('--headless')
-    options.add_argument('--window-size=1920,1080')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    # context.driver = webdriver.Chrome(
+    # options = webdriver.FirefoxOptions()
+    # options.add_argument('--headless')
+    # options.add_argument('--window-size=1920,1080')
+    # options.add_argument('--disable-gpu')
+    # options.add_argument('--no-sandbox')
+    # options.add_argument('--disable-dev-shm-usage')
+    # # context.driver = webdriver.Chrome(
+    # #     options=options,
+    # #     service=service
+    # # )
+    # context.driver = webdriver.Firefox(
     #     options=options,
     #     service=service
     # )
-    context.driver = webdriver.Firefox(
-        options=options,
-        service=service
-    )
 
     ## EventFiringWebDriver - log file ###
     ## for drivers ###
@@ -63,6 +63,12 @@ def browser_init(context):
     # bs_key = 'Cc4pkzwnwUaT4mnsfuUq'
     # url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
     # context.driver = webdriver.Remote(url, desired_capabilities=desired_cap)
+
+    ### MOBILE ######
+    mobile_emulation = {"deviceName": "Nexus 5"}
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+    context.driver = webdriver.Chrome(executable_path='/chromedriver.exe', chrome_options=chrome_options)
 
     context.driver.wait = WebDriverWait(context.driver, 10)
     #context.app = Application(driver=context.driver)
